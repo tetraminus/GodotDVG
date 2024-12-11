@@ -4,3 +4,4 @@
 
 # macOS specific ignores
 .DS_Store
+/sounds

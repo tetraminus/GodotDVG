@@ -6,4 +6,8 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <LangVersion>12</LangVersion>
   </PropertyGroup>
+  <ItemGroup>
+    <Folder Include=".git\" />
+    <Folder Include="lib\" />
+  </ItemGroup>
 </Project>

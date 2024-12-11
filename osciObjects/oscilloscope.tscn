@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dv60av454mljl"]
+
+[ext_resource type="Script" path="res://osciObjects/OscilloscopeOgg.cs" id="1_cty86"]
+
+[node name="Oscilloscope" type="Node2D"]
+script = ExtResource("1_cty86")
+filePath = "res://sounds/songs/Avril Flicka i krans.ogg"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

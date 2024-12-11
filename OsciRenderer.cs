@@ -24,7 +24,7 @@ public partial class OsciRenderer : Node2D
         multiMesh = new MultiMesh();
         
         
-        RenderingServer.CanvasItemSetCustomRect(GetCanvasItem(), true, new Rect2(0, 0, 1000, 1000));
+        
     }
     
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,6 +32,7 @@ public partial class OsciRenderer : Node2D
     {
         base._Process(delta);
         QueueRedraw();
+        RenderingServer.CanvasItemSetCustomRect(GetCanvasItem(), true, new Rect2(-Vector2.Inf,Vector2.Inf));
         
         if (fpsLabel != null)
         {
@@ -52,6 +53,7 @@ public partial class OsciRenderer : Node2D
         if (points.Length < 2) return;
         multiMesh.InstanceCount = 0;
         multiMesh.UseCustomData = true;
+        multiMesh.UseColors = true;
         multiMesh.CustomAabb = new Aabb(new Vector3(0, 0, 0), new Vector3(1000, 1000, 0));
         multiMesh.TransformFormat = MultiMesh.TransformFormatEnum.Transform2D;
         multiMesh.Mesh = mesh;
@@ -65,6 +67,7 @@ public partial class OsciRenderer : Node2D
           
             multiMesh.SetInstanceCustomData(i, new Color(p1.X, p1.Y, p2.X, p2.Y));
             multiMesh.SetInstanceTransform2D(i, Transform2D.Identity);
+            multiMesh.SetInstanceColor(i, new Color(1.60f,1.6f,0.2f));
         }
         
         DrawMultimesh(multiMesh, null);

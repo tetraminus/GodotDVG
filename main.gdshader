@@ -12,11 +12,15 @@ uniform float uSize = 1.0;
 uniform float uInvert = 1.0;
 uniform float uIntensity = 1.0;
 varying vec4 uvl;
+varying vec4 uColor;
 
 void vertex() {
 	vec2 pos1 = INSTANCE_CUSTOM.xy;
 	vec2 pos2 = INSTANCE_CUSTOM.zw;
     uvl = vec4(0.0);
+
+    // VERTEX COLOR
+    uColor = COLOR;
 
     vec2 aStart = pos1;
     vec2 aEnd = pos2;
@@ -100,7 +104,7 @@ void fragment() {
 
         float afterglow = 1.0;
         alpha *= afterglow * uIntensity;
-        COLOR = vec4(.15,1,.15,alpha);
+        COLOR = vec4(COLOR.xyz,alpha);
 }
 
 //void light() {

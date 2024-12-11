@@ -21,6 +21,7 @@ OsciManager="*res://OsciManager.cs"
 
 [display]
 
+window/size/always_on_top=true
 window/stretch/mode="canvas_items"
 
 [dotnet]
@@ -30,3 +31,4 @@ project/assembly_name="VectorRendering"
 [rendering]
 
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+viewport/hdr_2d=true

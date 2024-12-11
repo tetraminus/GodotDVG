@@ -1,140 +1,60 @@
-[gd_scene load_steps=10 format=3 uid="uid://vnh8yge5f876"]
+[gd_scene load_steps=8 format=3 uid="uid://vnh8yge5f876"]
 
 [ext_resource type="Shader" uid="uid://c2pu6cxrtmx18" path="res://main.gdshader" id="2_1bvp3"]
 [ext_resource type="Script" uid="uid://pa2ni8hb1l2a" path="res://OsciRenderer.cs" id="3_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://c4m00ikycsc1k" path="res://icon.svg" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://bxsah7h3biyvf" path="res://BouncyBall.tscn" id="3_lquwl"]
-[ext_resource type="PackedScene" uid="uid://dfd4hg7im5hb2" path="res://mousetracer.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dv60av454mljl" path="res://osciObjects/oscilloscope.tscn" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://0oj0mitqbef3" path="res://Fingerprints001_4K-JPG/Fingerprints001_4K-JPG_Opacity.jpg" id="6_7mycd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1bvp3"]
 shader = ExtResource("2_1bvp3")
-shader_parameter/uSize = 4.0
+shader_parameter/uSize = 3.0
 shader_parameter/uInvert = 1.0
 shader_parameter/uIntensity = 2.0
 
-[sub_resource type="QuadMesh" id="QuadMesh_1bvp3"]
+[sub_resource type="QuadMesh" id="QuadMesh_lquwl"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
-size = Vector2(20, 660)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
-size = Vector2(1138, 38)
+[sub_resource type="Environment" id="Environment_lquwl"]
+background_mode = 3
+glow_enabled = true
+glow_levels/1 = 1.5
+glow_levels/2 = 1.45
+glow_levels/3 = 0.0
+glow_levels/5 = 0.2
+glow_levels/6 = 0.3
+glow_levels/7 = 0.4
+glow_bloom = 0.1
+glow_blend_mode = 0
+glow_hdr_threshold = 0.5
+glow_map = ExtResource("6_7mycd")
 
 [node name="Main" type="Node2D"]
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(981, -128)
-texture = ExtResource("3_h2yge")
 
 [node name="OsciRenderer" type="Node2D" parent="."]
 process_priority = 2147483647
 z_index = 999
 material = SubResource("ShaderMaterial_1bvp3")
 script = ExtResource("3_1bvp3")
-mesh = SubResource("QuadMesh_1bvp3")
+mesh = SubResource("QuadMesh_lquwl")
 metadata/_custom_type_script = ExtResource("3_1bvp3")
 
 [node name="Label" type="Label" parent="OsciRenderer"]
 offset_right = 40.0
 offset_bottom = 23.0
-text = "FPS: 140"
+text = "FPS: 60"
 
-[node name="BouncyBall" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(401, 219)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+visible = false
 
-[node name="BouncyBall2" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(832, 193)
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="BouncyBall3" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(122, 168)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lquwl")
 
-[node name="BouncyBall4" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(496, 442)
-
-[node name="BouncyBall5" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(849, 434)
-
-[node name="BouncyBall6" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(183, 472)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 320)
-shape = SubResource("RectangleShape2D_h2yge")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1153, 320)
-shape = SubResource("RectangleShape2D_h2yge")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(574, 644)
-shape = SubResource("RectangleShape2D_1bvp3")
-
-[node name="BouncyBall7" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(175, 306)
-
-[node name="BouncyBall8" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(533, 302)
-
-[node name="BouncyBall9" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(334, 392)
-
-[node name="BouncyBall10" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(233, 91)
-
-[node name="BouncyBall11" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(517, 117)
-
-[node name="BouncyBall12" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(654, 155)
-
-[node name="BouncyBall13" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(730, 330)
-
-[node name="BouncyBall14" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(650, 547)
-
-[node name="BouncyBall15" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(1077, 317)
-
-[node name="BouncyBall16" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(1016, 97)
-
-[node name="BouncyBall17" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(822, 58)
-
-[node name="BouncyBall18" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(899, 315)
-
-[node name="BouncyBall19" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(1027, 502)
-
-[node name="BouncyBall20" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(477, -89)
-
-[node name="BouncyBall21" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(349, -306)
-
-[node name="BouncyBall22" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(700, -330)
-
-[node name="BouncyBall23" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(496, -483)
-
-[node name="BouncyBall24" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(157, -110)
-
-[node name="BouncyBall25" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(751, -187)
-
-[node name="BouncyBall26" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(625, -199)
-
-[node name="BouncyBall27" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(662, -11)
-
-[node name="BouncyBall28" parent="." instance=ExtResource("3_lquwl")]
-position = Vector2(329, -36)
-
-[node name="Mousetracer" parent="." instance=ExtResource("5_lquwl")]
+[node name="Oscilloscope" parent="." instance=ExtResource("4_1bvp3")]
