@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfd4hg7im5hb2"]
+
+[ext_resource type="Script" uid="uid://b83cu7qs5f5al" path="res://Mousetracer.cs" id="1_dg02k"]
+
+[node name="Mousetracer" type="Node2D"]
+script = ExtResource("1_dg02k")

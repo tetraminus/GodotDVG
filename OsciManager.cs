@@ -33,4 +33,14 @@ public partial class OsciManager : Node
 	{
 		return (Vector2[]) _points.ToArray();
 	}
+
+	public void AddPoints(Array<Vector2> points)
+	{
+		_points.AddRange(points);
+	}
+	public void AddPoints(Vector2[] points)
+	{
+		_points.AddRange(points);
+	}
+	
 }

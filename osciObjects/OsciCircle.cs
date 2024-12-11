@@ -20,13 +20,15 @@ public partial class OsciCircle : OsciObject
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		var points = new Vector2[resolution + 1];
 		for (int i = 0; i < resolution + 1; i++)
 		{
 			float angle = Mathf.Pi * 2 / resolution * i;
 			Vector2 point = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * _circleShape.Radius;
 
 			point += GlobalPosition;
-			OsciManager.Ins.AddPoint(point);
+			points[i] = point;
 		}
+		OsciManager.Ins.AddPoints(points);
 	}
 }

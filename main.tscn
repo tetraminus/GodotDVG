@@ -4,14 +4,15 @@
 [ext_resource type="Script" uid="uid://pa2ni8hb1l2a" path="res://OsciRenderer.cs" id="3_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://c4m00ikycsc1k" path="res://icon.svg" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bxsah7h3biyvf" path="res://BouncyBall.tscn" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dfd4hg7im5hb2" path="res://mousetracer.tscn" id="5_lquwl"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bvp3"]
 shader = ExtResource("2_1bvp3")
+shader_parameter/uSize = 4.0
+shader_parameter/uInvert = 1.0
+shader_parameter/uIntensity = 2.0
 
-[sub_resource type="Gradient" id="Gradient_1bvp3"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_lquwl"]
-gradient = SubResource("Gradient_1bvp3")
+[sub_resource type="QuadMesh" id="QuadMesh_1bvp3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
 size = Vector2(20, 660)
@@ -28,15 +29,15 @@ texture = ExtResource("3_h2yge")
 [node name="OsciRenderer" type="Node2D" parent="."]
 process_priority = 2147483647
 z_index = 999
-material = SubResource("ShaderMaterial_lquwl")
+material = SubResource("ShaderMaterial_1bvp3")
 script = ExtResource("3_1bvp3")
-texture = SubResource("GradientTexture2D_lquwl")
+mesh = SubResource("QuadMesh_1bvp3")
 metadata/_custom_type_script = ExtResource("3_1bvp3")
 
 [node name="Label" type="Label" parent="OsciRenderer"]
 offset_right = 40.0
 offset_bottom = 23.0
-text = "FPS: 61"
+text = "FPS: 140"
 
 [node name="BouncyBall" parent="." instance=ExtResource("3_lquwl")]
 position = Vector2(401, 219)
@@ -90,3 +91,50 @@ position = Vector2(654, 155)
 
 [node name="BouncyBall13" parent="." instance=ExtResource("3_lquwl")]
 position = Vector2(730, 330)
+
+[node name="BouncyBall14" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(650, 547)
+
+[node name="BouncyBall15" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(1077, 317)
+
+[node name="BouncyBall16" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(1016, 97)
+
+[node name="BouncyBall17" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(822, 58)
+
+[node name="BouncyBall18" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(899, 315)
+
+[node name="BouncyBall19" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(1027, 502)
+
+[node name="BouncyBall20" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(477, -89)
+
+[node name="BouncyBall21" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(349, -306)
+
+[node name="BouncyBall22" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(700, -330)
+
+[node name="BouncyBall23" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(496, -483)
+
+[node name="BouncyBall24" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(157, -110)
+
+[node name="BouncyBall25" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(751, -187)
+
+[node name="BouncyBall26" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(625, -199)
+
+[node name="BouncyBall27" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(662, -11)
+
+[node name="BouncyBall28" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(329, -36)
+
+[node name="Mousetracer" parent="." instance=ExtResource("5_lquwl")]

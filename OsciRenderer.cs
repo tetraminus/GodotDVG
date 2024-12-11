@@ -7,20 +7,22 @@ namespace VectorRendering;
 [Tool]
 public partial class OsciRenderer : Node2D
 {
-    
-    private ArrayMesh mesh;
+    [Export]
+    private Mesh mesh = new QuadMesh();
+    private MultiMesh multiMesh;
     private Label fpsLabel;
+    private ShaderMaterial shaderMaterial;
     [Export]
     private Texture2D texture;
     
     public OsciRenderer()
     {
-        mesh = new ArrayMesh();
-        
-        
-        
         ProcessPriority = int.MaxValue;
         ZIndex = 999;
+        
+        shaderMaterial = Material as ShaderMaterial;
+        multiMesh = new MultiMesh();
+        
         
         RenderingServer.CanvasItemSetCustomRect(GetCanvasItem(), true, new Rect2(0, 0, 1000, 1000));
     }
@@ -48,52 +50,25 @@ public partial class OsciRenderer : Node2D
         if (OsciManager.Ins == null) return;
         Vector2[] points = OsciManager.Ins.GetPoints();
         if (points.Length < 2) return;
-        
-        //mesh.Clear();
-        
-        mesh.ClearSurfaces();
-        
-        var pointarr = new Vector2[6];
-        var uvarr = new Vector2[6];
-            
-        uvarr[0] = new Vector2(0, 0);
-        uvarr[1] = new Vector2(1, 0);
-        uvarr[2] = new Vector2(1, 1);
-        uvarr[3] = new Vector2(0, 1);
-        uvarr[4] = new Vector2(0, 0);
-        uvarr[5] = new Vector2(1, 1);
-        
-        
-
-        var st = new SurfaceTool();
-        st.Begin(Mesh.PrimitiveType.Triangles);
+        multiMesh.InstanceCount = 0;
+        multiMesh.UseCustomData = true;
+        multiMesh.CustomAabb = new Aabb(new Vector3(0, 0, 0), new Vector3(1000, 1000, 0));
+        multiMesh.TransformFormat = MultiMesh.TransformFormatEnum.Transform2D;
+        multiMesh.Mesh = mesh;
+        multiMesh.InstanceCount = points.Length - 1;
+     
         
         for (int i = 0; i < points.Length - 1; i++)
         {
-            var dir = (points[i + 1] - points[i]).Normalized().Rotated(Mathf.Pi / 2);
-            var width = 4;
-            
-            // pointarr[0] = points[i] + dir * width;
-            // pointarr[1] = points[i + 1] + dir * width;
-            // pointarr[2] = points[i + 1] - dir * width;
-            // pointarr[3] = points[i] - dir * width;
-            
-            // two triangles, six points
-            pointarr[0] = points[i] + dir * width;
-            pointarr[1] = points[i + 1] + dir * width;
-            pointarr[2] = points[i + 1] - dir * width;
-            pointarr[3] = points[i] - dir * width;
-            pointarr[4] = points[i] + dir * width;
-            pointarr[5] = points[i + 1] - dir * width;
-            for (int j = 0; j < 6; j++)
-            {
-                st.SetUV(uvarr[j]);
-                st.AddVertex(new Vector3(pointarr[j].X, pointarr[j].Y, 0));
-            }
+            Vector2 p1 = points[i];
+            Vector2 p2 = points[i + 1];
+          
+            multiMesh.SetInstanceCustomData(i, new Color(p1.X, p1.Y, p2.X, p2.Y));
+            multiMesh.SetInstanceTransform2D(i, Transform2D.Identity);
         }
         
-        mesh = st.Commit();
+        DrawMultimesh(multiMesh, null);
         
-        DrawMesh(mesh, new Texture2D());
+        
     }
 }
