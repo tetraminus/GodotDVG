@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxsah7h3biyvf"]
+
+[ext_resource type="Script" uid="uid://wb6enm2no0yf" path="res://osciObjects/OsciCircle.cs" id="1_noite"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_noite"]
+bounce = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bc8qd"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_noite"]
+radius = 32.0
+
+[node name="BouncyBall" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_noite")
+
+[node name="OsciCircle" type="Node2D" parent="."]
+script = ExtResource("1_noite")
+_circleShape = SubResource("CircleShape2D_bc8qd")
+metadata/_custom_type_script = ExtResource("1_noite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_noite")

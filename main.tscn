@@ -1,0 +1,92 @@
+[gd_scene load_steps=10 format=3 uid="uid://vnh8yge5f876"]
+
+[ext_resource type="Shader" uid="uid://c2pu6cxrtmx18" path="res://main.gdshader" id="2_1bvp3"]
+[ext_resource type="Script" uid="uid://pa2ni8hb1l2a" path="res://OsciRenderer.cs" id="3_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://c4m00ikycsc1k" path="res://icon.svg" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bxsah7h3biyvf" path="res://BouncyBall.tscn" id="3_lquwl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lquwl"]
+shader = ExtResource("2_1bvp3")
+
+[sub_resource type="Gradient" id="Gradient_1bvp3"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_lquwl"]
+gradient = SubResource("Gradient_1bvp3")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(20, 660)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+size = Vector2(1138, 38)
+
+[node name="Main" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(981, -128)
+texture = ExtResource("3_h2yge")
+
+[node name="OsciRenderer" type="Node2D" parent="."]
+process_priority = 2147483647
+z_index = 999
+material = SubResource("ShaderMaterial_lquwl")
+script = ExtResource("3_1bvp3")
+texture = SubResource("GradientTexture2D_lquwl")
+metadata/_custom_type_script = ExtResource("3_1bvp3")
+
+[node name="Label" type="Label" parent="OsciRenderer"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "FPS: 61"
+
+[node name="BouncyBall" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(401, 219)
+
+[node name="BouncyBall2" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(832, 193)
+
+[node name="BouncyBall3" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(122, 168)
+
+[node name="BouncyBall4" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(496, 442)
+
+[node name="BouncyBall5" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(849, 434)
+
+[node name="BouncyBall6" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(183, 472)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 320)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1153, 320)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(574, 644)
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="BouncyBall7" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(175, 306)
+
+[node name="BouncyBall8" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(533, 302)
+
+[node name="BouncyBall9" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(334, 392)
+
+[node name="BouncyBall10" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(233, 91)
+
+[node name="BouncyBall11" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(517, 117)
+
+[node name="BouncyBall12" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(654, 155)
+
+[node name="BouncyBall13" parent="." instance=ExtResource("3_lquwl")]
+position = Vector2(730, 330)
