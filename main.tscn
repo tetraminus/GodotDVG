@@ -1,17 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://vnh8yge5f876"]
 
-[ext_resource type="Shader" uid="uid://c2pu6cxrtmx18" path="res://main.gdshader" id="2_1bvp3"]
-[ext_resource type="Script" uid="uid://pa2ni8hb1l2a" path="res://OsciRenderer.cs" id="3_1bvp3"]
+[ext_resource type="Script" uid="uid://cjox6n4g7owik" path="res://Fpscounter.cs" id="1_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dv60av454mljl" path="res://osciObjects/oscilloscope.tscn" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://br8ogi0h31awo" path="res://shaders/compeffect.gd" id="5_lquwl"]
 [ext_resource type="Texture2D" uid="uid://0oj0mitqbef3" path="res://Fingerprints001_4K-JPG/Fingerprints001_4K-JPG_Opacity.jpg" id="6_7mycd"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bvp3"]
-shader = ExtResource("2_1bvp3")
-shader_parameter/uSize = 3.0
-shader_parameter/uInvert = 1.0
-shader_parameter/uIntensity = 2.0
-
-[sub_resource type="QuadMesh" id="QuadMesh_lquwl"]
 
 [sub_resource type="Environment" id="Environment_lquwl"]
 background_mode = 3
@@ -27,24 +19,23 @@ glow_blend_mode = 0
 glow_hdr_threshold = 0.5
 glow_map = ExtResource("6_7mycd")
 
-[node name="Main" type="Node2D"]
+[sub_resource type="CompositorEffect" id="CompositorEffect_1bvp3"]
+resource_local_to_scene = false
+resource_name = ""
+enabled = true
+effect_callback_type = 4
+needs_motion_vectors = false
+needs_normal_roughness = false
+script = ExtResource("5_lquwl")
+metadata/_custom_type_script = ExtResource("5_lquwl")
 
-[node name="OsciRenderer" type="Node2D" parent="."]
-process_priority = 2147483647
-z_index = 999
-material = SubResource("ShaderMaterial_1bvp3")
-script = ExtResource("3_1bvp3")
-mesh = SubResource("QuadMesh_lquwl")
-metadata/_custom_type_script = ExtResource("3_1bvp3")
+[sub_resource type="Compositor" id="Compositor_1bvp3"]
+compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_1bvp3")])
 
-[node name="Label" type="Label" parent="OsciRenderer"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "FPS: 60"
+[node name="Node3D" type="Node3D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 visible = false
@@ -53,8 +44,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.223126, 0.214881, 0.494527, 1)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("1_1bvp3")
+
+[node name="Main" type="Node2D" parent="."]
+
+[node name="Oscilloscope" parent="Main" instance=ExtResource("4_1bvp3")]
+filePath = "res://sounds/songs/+ERABY+E CONNEC+10N.ogg"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lquwl")
+compositor = SubResource("Compositor_1bvp3")
 
-[node name="Oscilloscope" parent="." instance=ExtResource("4_1bvp3")]
+[node name="Camera3D" type="Camera3D" parent="."]
